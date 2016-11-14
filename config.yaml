@@ -1,0 +1,6 @@
+token: <token here>
+numbers:
+  - name: test1
+    number: +23232414124
+  - name: test2
+    number: +33242424243

@@ -1,21 +1,46 @@
 package main
 
 import (
-	"github.com/gerifield/go-pushbullet"
 	"io/ioutil"
 	"log"
 	"os"
+
+	//"github.com/gerifield/go-pushbullet"
+	"gopkg.in/yaml.v2"
 )
+
+type Number struct {
+	Name  string `yaml:"name"`
+	Phone string `yaml:"number"`
+}
+
+type Config struct {
+	Token   string   `yaml:"token"`
+	Numbers []Number `yaml:"numbers"`
+}
 
 func main() {
 	if len(os.Args) < 2 {
-		log.Fatalln("Usage: %s <phone number>", os.Args[0])
+		log.Fatalln("Usage: %s <phone number/name from config>", os.Args[0])
 		return
 	}
 
-	phoneNum := os.Args[1]
+	bc, err := ioutil.ReadFile("config.yaml")
+	if err != nil {
+		log.Fatalln(err)
+		return
+	}
 
-	pb := pushbullet.New("<TOKEN HERE>")
+	var conf Config
+	err = yaml.Unmarshal(bc, &conf)
+	if err != nil {
+		log.Fatalln(err)
+		return
+	}
+
+	phoneNum := findByNameWithFallback(os.Args[1], conf.Numbers)
+
+	pb := pushbullet.New(conf.Token)
 	devs, err := pb.Devices()
 	if err != nil {
 		log.Fatalln(err)
@@ -46,4 +71,13 @@ func main() {
 	}
 
 	log.Println("Success")
+}
+
+func findByNameWithFallback(name string, numbers []Number) string {
+	for _, it := range numbers {
+		if it.Name == name {
+			return it.Phone
+		}
+	}
+	return name
 }

@@ -1,6 +1,8 @@
-hash: ea3b8e6040772abfa1a231f65d73fa785fc3bd15b6595799b5a1b298734b4b1e
-updated: 2016-11-14T12:37:00.30469665+01:00
+hash: eb478905f5cf92a515c9c4f0363019b62024738969d5386b335a037fc71a53c9
+updated: 2016-11-14T12:44:54.963559384+01:00
 imports:
 - name: github.com/gerifield/go-pushbullet
   version: 92092738992af0e8c601f09f0e962d837b663607
+- name: gopkg.in/yaml.v2
+  version: a5b47d31c556af34a302ce5d659e6fea44d90de0
 testImports: []
