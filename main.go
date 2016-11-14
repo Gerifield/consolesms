@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	//"github.com/gerifield/go-pushbullet"
+	"github.com/gerifield/go-pushbullet"
 	"gopkg.in/yaml.v2"
 )
 
