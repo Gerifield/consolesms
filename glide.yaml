@@ -1,0 +1,3 @@
+package: github.com/gerifield/gopbsms
+import:
+- package: github.com/gerifield/go-pushbullet
